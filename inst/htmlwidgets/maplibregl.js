@@ -1413,19 +1413,12 @@ HTMLWidgets.widget({
                 );
 
                 // Toggle layer visibility by changing the layout object's visibility property
-                if (visibility === "visible") {
-                  map.setLayoutProperty(clickedLayer, "visibility", "none");
-                  this.className = "";
-
-                  // Hide associated legends
-                  const associatedLegends = document.querySelectorAll(
-                    `.mapboxgl-legend[data-layer-id="${clickedLayer}"]`,
-                  );
-                  associatedLegends.forEach((legend) => {
-                    legend.style.display = "none";
-                  });
-                } else {
                   this.className = "active";
+                console.log(layers);
+                layers.forEach((layerId, index) => {
+                  console.log(layerId);
+                map.setLayoutProperty(layerId, "visibility", "none");
+                });
                   map.setLayoutProperty(clickedLayer, "visibility", "visible");
 
                   // Show associated legends
@@ -1435,7 +1428,7 @@ HTMLWidgets.widget({
                   associatedLegends.forEach((legend) => {
                     legend.style.display = "";
                   });
-                }
+                
               };
 
               layersList.appendChild(link);
